@@ -26,7 +26,7 @@ medicine_model = joblib.load('medicine_model.pkl')
 medicine_df = pd.read_csv('medicine_data.csv')
 
 # Environment variable for SERPAPI API key
-SERPAPI_API_KEY = '8dccb663327a4de4102deae65df095ebc2d229b549bf459de1bb8f5cad1bf4a0'
+SERPAPI_API_KEY = ''
 
 # MongoDB connection
 client = MongoClient('mongodb://localhost:27017/')
@@ -189,7 +189,7 @@ def chatbot():
 
 class SwasthSupportChatbot:
     def __init__(self):
-        self.api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyAwqVXD03Dtm-r2FPaRnc-VHNR276zHiDQ"
+        self.api_url = ""
         self.headers = {'Content-Type': 'application/json'}
         self.prompt = """You are स्वस्थ Support a Chatbot designed specifically for the medical/healthcare sector.
 You should be able to answer any queries related to health.
