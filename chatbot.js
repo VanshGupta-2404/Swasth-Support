@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Initialize your Generative AI instance
-const apiKey = 'AIzaSyAwqVXD03Dtm-r2FPaRnc-VHNR276zHiDQ'; // Replace with your actual API key
+const apiKey = ''; // Replace with your actual API key
 const genAI = new GoogleGenerativeAI(apiKey);
 
 // Define your generative model
@@ -19,7 +19,7 @@ const model = genAI.getGenerativeModel({
     systemInstruction: 'Your system instruction here'
 });
 
-// Example route handling POST request to /api/chat
+// Example route handling POST request to //chat
 app.post('/api/chat', async (req, res) => {
     const userMessage = req.body.message;
 
