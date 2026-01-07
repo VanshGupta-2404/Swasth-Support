@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Your Diabetes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        span {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <nav class="flex justify-between items-center py-4 px-10 bg-white shadow-md">
+        <div class="flex items-center">
+            <h1 class="text-4xl font-bold text-gray-800 p-2">स्वास्थ्य <span>Support</span></h1>
+        </div>
+    </nav>
+
+
+    <section class="py-20 px-10">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-extrabold text-gray-800">Check Your Diabetes</h1>
+            <form id="diabetesForm" class="mt-10">
+                <div class="mb-4">
+                    <label for="pregnancies" class="block text-lg text-gray-700">Pregnancies</label>
+                    <input type="number" id="pregnancies" name="pregnancies"
+                        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+                <div class="mb-4">
+                    <label for="glucose" class="block text-lg text-gray-700">Glucose</label>
+                    <input type="number" id="glucose" name="glucose"
+                        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+                <div class="mb-4">
+                    <label for="blood_pressure" class="block text-lg text-gray-700">Blood Pressure</label>
+                    <input type="number" id="blood_pressure" name="blood_pressure"
+                        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+                <div class="mb-4">
+                    <label for="skin_thickness" class="block text-lg text-gray-700">Skin Thickness</label>
+                    <input type="number" id="skin_thickness" name="skin_thickness"
+                        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+                <div class="mb-4">
+                    <label for="insulin" class="block text-lg text-gray-700">Insulin</label>
+                    <input type="number" id="insulin" name="insulin"
+                        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+                <div class="mb-4">
+                    <label for="bmi" class="block text-lg text-gray-700">BMI</label>
+                    <input type="number" id="bmi" name="bmi"
+                        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+                <div class="mb-4">
+                    <label for="diabetes_pedigree_function" class="block text-lg text-gray-700">Diabetes Pedigree
+                        Function</label>
+                    <input type="number" step="any" id="diabetes_pedigree_function" name="diabetes_pedigree_function"
+                        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+                <div class="mb-4">
+                    <label for="age" class="block text-lg text-gray-700">Age</label>
+                    <input type="number" id="age" name="age"
+                        class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+                <button type="submit"
+                    class="px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300">Check
+                    Diabetes</button>
+            </form>
+            <div id="result" class="mt-10 text-2xl font-semibold text-gray-800"></div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('diabetesForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const formObject = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/predict-diabetes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formObject)
+                });
+
+                if (response.ok) {
+                    const result = await response.text();
+                    document.getElementById('result').textContent = result;
+                } else {
+                    document.getElementById('result').textContent = 'An error occurred while processing your request.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').textContent = 'An error occurred while processing your request.';
+            }
+        });
+    </script>
+</body>
+
+</html>

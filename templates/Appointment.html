@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>स्वास्थ्य SUPPORT</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <style>
+        * {
+            font-family: 'Open Sans';
+        }
+
+        body {
+            font-family: 'Open Sans';
+        }
+
+        nav {
+            background-color: #f8f9fa;
+        }
+
+        span {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-gray-100">
+    <nav class="flex justify-between items-center py-4 px-10 bg-white shadow-md">
+        <div class="flex items-center">
+            <h1 class="text-4xl font-bold text-gray-800 p-2">स्वास्थ्य <span>Support</span></h1>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Book an Appointment</h1>
+        <form id="appointment-form" class="bg-white p-6 rounded shadow-md">
+            <div class="mb-4">
+                <label for="state" class="block text-gray-700">State:</label>
+                <select id="state" name="state" class="form-select mt-1 block w-full">
+                    <option value="">Select State</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="city" class="block text-gray-700">City:</label>
+                <select id="city" name="city" class="form-select mt-1 block w-full">
+                    <option value="">Select City</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="doctor" class="block text-gray-700">Doctor:</label>
+                <select id="doctor" name="doctor" class="form-select mt-1 block w-full">
+                    <option value="">Select Doctor</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="time-slot" class="block text-gray-700">Time Slot:</label>
+                <select id="time-slot" name="timeSlot" class="form-select mt-1 block w-full">
+                    <option value="">Select Time Slot</option>
+                </select>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Book Appointment</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const stateSelect = $('#state');
+            const citySelect = $('#city');
+            const doctorSelect = $('#doctor');
+            const timeSlotSelect = $('#time-slot');
+
+            const states = [
+                'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
+                'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand',
+                'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur',
+                'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Punjab',
+                'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura',
+                'Uttar Pradesh', 'Uttarakhand', 'West Bengal'
+            ];
+
+            const cities = {
+                'Andhra Pradesh': ['Visakhapatnam', 'Vijayawada', 'Tirupati'],
+                'Karnataka': ['Bengaluru', 'Mysuru', 'Hubli'],
+            };
+
+            const doctors = {
+                'Visakhapatnam': [
+                    { name: 'Dr. John Doe', specialty: 'Cardiologist' },
+                    { name: 'Dr. Jane Smith', specialty: 'Neurologist' },
+                ],
+                'Bengaluru': [
+                    { name: 'Dr. Emily Davis', specialty: 'Orthopedic' },
+                    { name: 'Dr. Michael Brown', specialty: 'Dermatologist' },
+                ],
+            };
+
+            const timeSlots = [
+                '08:00 AM', '08:30 AM', '09:00 AM', '09:30 AM',
+                '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
+                '01:00 PM', '01:30 PM', '02:00 PM', '02:30 PM',
+                '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM',
+                '05:00 PM', '05:30 PM'
+            ];
+
+            // Populate state select
+            stateSelect.append('<option value="">Select State</option>');
+            states.forEach(state => {
+                stateSelect.append(`<option value="${state}">${state}</option>`);
+            });
+
+            // Handle state change
+            stateSelect.change(function () {
+                const state = $(this).val();
+                citySelect.empty().append('<option>Select City</option>');
+                doctorSelect.empty().append('<option>Select Doctor</option>');
+                timeSlotSelect.empty().append('<option>Select Time Slot</option>');
+
+                if (state && cities[state]) {
+                    // Populate city select based on state
+                    cities[state].forEach(city => {
+                        citySelect.append(`<option value="${city}">${city}</option>`);
+                    });
+
+                    citySelect.change(function () {
+                        const city = $(this).val();
+                        if (city && doctors[city]) {
+                            doctorSelect.empty().append('<option>Select Doctor</option>');
+                            doctors[city].forEach(doctor => {
+                                doctorSelect.append(`<option value="${doctor.name}">${doctor.name} (${doctor.specialty})</option>`);
+                            });
+
+                            doctorSelect.change(function () {
+                                const doctor = $(this).val();
+                                if (doctor) {
+                                    timeSlotSelect.empty();
+                                    timeSlots.forEach(slot => {
+                                        timeSlotSelect.append(`<option value="${slot}">${slot}</option>`);
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            $('#appointment-form').submit(function (event) {
+                event.preventDefault();
+
+                const formData = $(this).serializeArray();
+                const data = {};
+                $.each(formData, function (i, field) {
+                    data[field.name] = field.value;
+                });
+
+                $.ajax({
+                    url: 'http://localhost:5000/api/book-appointment',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function (response) {
+                        alert(response.message);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('An error occurred: ' + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

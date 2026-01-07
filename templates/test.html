@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Data Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <section id="edit-data" class="py-20 px-10 bg-gray-200">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-extrabold text-gray-800">Enter Personal Data</h2>
+            <p class="my-5 text-lg text-blue-700">Update your personal information below.</p>
+            <form id="health-form" class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <input type="text" name="name" class="px-4 py-3 border-2 border-gray-300 rounded-lg"
+                        placeholder="Name">
+                    <input type="date" name="dob" class="px-4 py-3 border-2 border-gray-300 rounded-lg"
+                        placeholder="Date of Birth">
+                    <select name="gender" class="px-4 py-3 border-2 border-gray-300 rounded-lg">
+                        <option value="" disabled selected>Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <select name="blood_group" class="px-4 py-3 border-2 border-gray-300 rounded-lg">
+                        <option value="" disabled selected>Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                    <input type="text" name="height" class="px-4 py-3 border-2 border-gray-300 rounded-lg"
+                        placeholder="Height">
+                    <input type="text" name="weight" class="px-4 py-3 border-2 border-gray-300 rounded-lg"
+                        placeholder="Weight">
+                    <input type="text" name="phone" class="px-4 py-3 border-2 border-gray-300 rounded-lg"
+                        placeholder="Phone">
+                    <input type="email" name="email" class="px-4 py-3 border-2 border-gray-300 rounded-lg"
+                        placeholder="Email">
+                    <select name="smoking" class="px-4 py-3 border-2 border-gray-300 rounded-lg">
+                        <option value="" disabled selected>Smoking</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="occasionally">Occasionally</option>
+                    </select>
+                    <select name="alcohol" class="px-4 py-3 border-2 border-gray-300 rounded-lg">
+                        <option value="" disabled selected>Alcohol</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                        <option value="occasionally">Occasionally</option>
+                    </select>
+                    <select name="exercise" class="px-4 py-3 border-2 border-gray-300 rounded-lg">
+                        <option value="" disabled selected>Exercise</option>
+                        <option value="regularly">Regularly</option>
+                        <option value="occasionally">Occasionally</option>
+                        <option value="never">Never</option>
+                    </select>
+                    <select name="diet" class="px-4 py-3 border-2 border-gray-300 rounded-lg">
+                        <option value="" disabled selected>Diet</option>
+                        <option value="balanced">Balanced</option>
+                        <option value="unbalanced">Unbalanced</option>
+                    </select>
+                    <select name="sleep" class="px-4 py-3 border-2 border-gray-300 rounded-lg">
+                        <option value="" disabled selected>Sleep</option>
+                        <option value="good">Good</option>
+                        <option value="poor">Poor</option>
+                    </select>
+                    <select name="stress" class="px-4 py-3 border-2 border-gray-300 rounded-lg">
+                        <option value="" disabled selected>Stress</option>
+                        <option value="high">High</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <button type="submit"
+                    class="mt-10 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
+                    Update
+                </button>
+            </form>
+            <div id="result" class="mt-10"></div>
+        </div>
+    </section>
+    <script>
+        document.getElementById('health-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            // Print the collected data to the console
+            console.log('Collected Personal Data:', data);
+
+            // Display the data on the page
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = '<h3>Personal Data Submitted:</h3>';
+            for (const [key, value] of Object.entries(data)) {
+                resultContainer.innerHTML += `<p><strong>${key}:</strong> ${value}</p>`;
+            }
+        });
+    </script>
+</body>
+
+</html>

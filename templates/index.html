@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>स्वास्थ्य SUPPORT</title>
+    <!-- External Stylesheets -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+    <style>
+      * {
+        font-family: "Open Sans";
+      }
+
+      body {
+        font-family: "Open Sans";
+      }
+
+      nav {
+        background-color: #f8f9fa;
+      }
+
+      span {
+        color: blue;
+      }
+    </style>
+  </head>
+
+  <body class="font-sans bg-gray-100">
+    <nav
+      class="flex justify-between items-center py-4 px-10 bg-white shadow-md"
+    >
+      <div class="flex items-center">
+        <h1 class="text-4xl font-bold text-gray-800 p-2">
+          स्वास्थ्य <span class="text-blue-600">Support</span>
+        </h1>
+        <button
+          id="know-pvr-btn"
+          class="ml-4 px-4 py-2 bg-blue-600 text-white rounded-full shadow-md hover:bg-blue-700 transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        >
+          Know your PVR Score
+        </button>
+      </div>
+      <div class="flex items-center ml-1">
+        <form
+          id="search-form"
+          class="flex items-center border border-gray-300 rounded-lg overflow-hidden shadow-md"
+        >
+          <input
+            type="text"
+            id="medicine_name"
+            name="medicine_name"
+            placeholder="Enter medicine name"
+            class="px-4 py-2 w-60 border-none focus:outline-none focus:ring-2 focus:ring-blue-600"
+            required
+          />
+          <button
+            type="submit"
+            class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+    </nav>
+
+    <section id="results" class="py-10 px-10 bg-gray-50">
+      <div class="max-w-8xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 text-center">
+          Fetch Results
+        </h2>
+        <div
+          id="search-results"
+          class="mt-5 bg-white p-6 border border-gray-200 rounded-lg shadow-lg"
+        ></div>
+      </div>
+    </section>
+
+    <section
+      id="edit-data"
+      class="py-20 px-10 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400"
+    >
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-4xl font-extrabold text-gray-800">
+          Enter Personal Data
+        </h2>
+        <p class="my-5 text-lg text-blue-700">
+          Update your personal information below.
+        </p>
+        <form
+          id="health-form"
+          class="bg-white p-8 rounded-2xl shadow-2xl border-4 border-blue-500 transform hover:scale-105 transition-transform"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input
+              type="text"
+              name="name"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+              placeholder="Name"
+            />
+            <input
+              type="date"
+              name="dob"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+              placeholder="Date of Birth"
+            />
+            <select
+              name="gender"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <option value="" disabled selected>Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <select
+              name="blood_group"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <option value="" disabled selected>Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
+            <input
+              type="text"
+              name="height"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+              placeholder="Height"
+            />
+            <input
+              type="text"
+              name="weight"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+              placeholder="Weight"
+            />
+            <input
+              type="text"
+              name="phone"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+              placeholder="Phone"
+            />
+            <input
+              type="email"
+              name="email"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+              placeholder="Email"
+            />
+            <select
+              name="smoking"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <option value="" disabled selected>Smoking</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+              <option value="occasionally">Occasionally</option>
+            </select>
+            <select
+              name="alcohol"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <option value="" disabled selected>Alcohol</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+              <option value="occasionally">Occasionally</option>
+            </select>
+            <select
+              name="exercise"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <option value="" disabled selected>Exercise</option>
+              <option value="regularly">Regularly</option>
+              <option value="occasionally">Occasionally</option>
+              <option value="never">Never</option>
+            </select>
+            <select
+              name="diet"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <option value="" disabled selected>Diet</option>
+              <option value="balanced">Balanced</option>
+              <option value="unbalanced">Unbalanced</option>
+            </select>
+            <select
+              name="sleep"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <option value="" disabled selected>Sleep</option>
+              <option value="good">Good</option>
+              <option value="poor">Poor</option>
+            </select>
+            <select
+              name="stress"
+              class="px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <option value="" disabled selected>Stress</option>
+              <option value="high">High</option>
+              <option value="moderate">Moderate</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="mt-10 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all transform hover:scale-105"
+          >
+            Submit
+          </button>
+        </form>
+        <div id="result" class="mt-10"></div>
+      </div>
+    </section>
+
+    <section id="banner" class="py-20 px-10 bg-gray-800 text-white text-center">
+      <h2 class="text-4xl font-extrabold">Chat with Our AI Assistant</h2>
+      <p class="my-5 text-lg opacity-90">
+        Ask any questions about your health and get instant answers.
+      </p>
+      <a
+        href="/chatbot"
+        class="px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors"
+      >
+        Chat Now
+      </a>
+    </section>
+
+    <section id="services" class="py-20 px-10 bg-gray-100">
+      <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-6xl font-extrabold text-black-800">Our Products</h2>
+        <p class="my-10 text-lg text-blue-700">
+          We provide the following services to help you stay healthy and fit.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-40 mt-10">
+          <div class="flex items-center">
+            <div class="ml-5 text-left">
+              <h3 class="text-2xl font-bold text-gray-800">
+                Disease Detection
+              </h3>
+              <p class="mt-5 text-gray-700">
+                Detect diseases using our AI-powered system and get instant
+                results.
+              </p>
+              <a
+                href="/disease"
+                class="mt-5 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >Detect Now</a
+              >
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="mr-5 text-left">
+              <h3 class="text-2xl font-bold text-gray-800">
+                Diabetes Prediction
+              </h3>
+              <p class="mt-5 text-gray-700">
+                Predict diabetes using our AI-powered system and get instant
+                results.
+              </p>
+              <a
+                href="/diabetes"
+                class="mt-5 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >Predict Now</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="banner" class="py-20 px-10 bg-gray-800 text-white text-center">
+      <h2 class="text-4xl font-extrabold">Book an Appointment</h2>
+      <p class="my-5 text-lg opacity-90">
+        Book an appointment with our doctors for a consultation.
+      </p>
+      <a
+        href="/appointment"
+        class="px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors"
+      >
+        Book Now
+      </a>
+    </section>
+
+    <section
+      id="blogs"
+      class="py-20 px-10 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300"
+    >
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-extrabold text-gray-800">Our Blogs</h2>
+        <p class="my-5 text-lg text-gray-700">
+          Read our latest blogs on health and fitness to stay updated.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
+          <div
+            class="bg-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform"
+          >
+            <h3 class="text-2xl font-bold text-gray-800 mt-5">
+              How to Stay Healthy
+            </h3>
+            <p class="mt-5 text-gray-700">
+              Learn how to stay healthy and fit by following a proper diet and
+              exercise routine.
+            </p>
+            <a
+              href="/blog1"
+              class="mt-5 inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all transform hover:scale-105"
+              >Read More</a
+            >
+          </div>
+          <div
+            class="bg-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform"
+          >
+            <h3 class="text-2xl font-bold text-gray-800 mt-5">
+              Importance of Sleep
+            </h3>
+            <p class="mt-5 text-gray-700">
+              Learn why sleep is important for your health and how it affects
+              your daily life.
+            </p>
+            <a
+              href="/blog2"
+              class="mt-5 inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all transform hover:scale-105"
+              >Read More</a
+            >
+          </div>
+          <div
+            class="bg-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform"
+          >
+            <h3 class="text-2xl font-bold text-gray-800 mt-5">
+              Benefits of Exercise
+            </h3>
+            <p class="mt-5 text-gray-700">
+              Learn about the benefits of exercise and how it can improve your
+              health and fitness.
+            </p>
+            <a
+              href="/blog3"
+              class="mt-5 inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all transform hover:scale-105"
+              >Read More</a
+            >
+          </div>
+        </div>
+        <a
+          href="/blogs"
+          class="mt-10 inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg hover:from-blue-600 hover:to-blue-800 transition-all transform hover:scale-105"
+          >Read More Blogs</a
+        >
+      </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-10 px-10">
+      <div class="max-w-4xl mx-auto flex justify-center">
+        <p>&copy; 2024 स्वास्थ्य. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      document
+        .getElementById("search-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          let medicineName = document
+            .getElementById("medicine_name")
+            .value.trim();
+          if (medicineName !== "") {
+            fetch(`/search?medicine_name=${encodeURIComponent(medicineName)}`)
+              .then((response) => response.json())
+              .then((data) => {
+                // Handle search results display
+                let resultContainer = document.getElementById("search-results");
+                resultContainer.innerHTML = "";
+                if (data.organic_results && data.organic_results.length > 0) {
+                  data.organic_results.forEach((result) => {
+                    let resultElement = document.createElement("div");
+                    resultElement.classList.add(
+                      "border",
+                      "border-gray-300",
+                      "p-4",
+                      "my-2",
+                      "rounded-lg"
+                    );
+                    resultElement.innerHTML = `
+                                    <h3 class="text-lg font-bold">${result.title}</h3>
+                                    <p class="text-gray-700">${result.snippet}</p>
+                                    <a href="${result.link}" class="text-blue-500">Read more</a>
+                                `;
+                    resultContainer.appendChild(resultElement);
+                  });
+                } else {
+                  resultContainer.innerHTML =
+                    '<p class="text-gray-700">No results found.</p>';
+                }
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+                let resultContainer = document.getElementById("search-results");
+                resultContainer.innerHTML =
+                  '<p class="text-red-500">Error fetching search results. Please try again later.</p>';
+              });
+          } else {
+            alert("Please enter a medicine name.");
+          }
+        });
+    </script>
+    <script>
+      document
+        .getElementById("know-pvr-btn")
+        .addEventListener("click", function () {
+          window.location.href = "/knowpvr"; // Redirects to the Flask route
+        });
+    </script>
+
+    <script>
+      document
+        .getElementById("health-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          const data = Object.fromEntries(formData.entries());
+
+          console.log("Collected Personal Data:", data);
+
+          const resultContainer = document.getElementById("result");
+          resultContainer.innerHTML = "<h3>Personal Data Submitted:</h3>";
+          for (const [key, value] of Object.entries(data)) {
+            resultContainer.innerHTML += `<p><strong>${key}:</strong> ${value}</p>`;
+          }
+        });
+    </script>
+  </body>
+</html>

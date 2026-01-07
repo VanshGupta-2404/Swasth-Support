@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Chatbot</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .chat-container {
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        span {
+            color: blue;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: #d1e7dd;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background-color: #e2e3e5;
+        }
+
+        .chat-header {
+            background-color: #0d6efd;
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .chat-body {
+            padding: 15px;
+            height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background-color: #ffffff;
+            border-top: 1px solid #e2e3e5;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+
+        .chat-input button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-200">
+    <nav class="flex justify-between items-center py-4 px-10 bg-white shadow-md">
+        <div class="flex items-center">
+            <h1 class="text-4xl font-bold text-gray-800 p-2">स्वास्थ्य <span>Support</span></h1>
+        </div>
+    </nav>
+    <div class="container mx-auto mt-10">
+        <div class="chat-container">
+            <div class="chat-header">Medical Chatbot</div>
+            <div class="chat-body" id="chatBody">
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Type your message here...">
+                <button id="sendButton">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatBody = document.getElementById('chatBody');
+            const userInput = document.getElementById('userInput');
+            const sendButton = document.getElementById('sendButton');
+
+            sendButton.addEventListener('click', async () => {
+                const message = userInput.value.trim();
+                if (message) {
+                    appendMessage(message, 'user');
+                    userInput.value = '';
+
+                    try {
+                        const response = await fetch('/send-message', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ message }),
+                        });
+                        const data = await response.json();
+                        appendMessage(data.response, 'bot');
+                    } catch (error) {
+                        console.error('Error:', error);
+                        appendMessage('Sorry, there was an error processing your request.', 'bot');
+                    }
+                }
+            });
+
+            userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendButton.click();
+                }
+            });
+
+            function appendMessage(message, sender) {
+                const messageElement = document.createElement('div');
+                messageElement.className = `message-bubble ${sender}-message`;
+                messageElement.textContent = message;
+                chatBody.appendChild(messageElement);
+                chatBody.scrollTop = chatBody.scrollHeight; // Scroll to the bottom
+            }
+        });
+    </script>
+</body>
+
+</html>
